@@ -8,10 +8,10 @@
     --grid-size: 80vh;
 
     /* #7f5af0 */
-    --text-color: #5841B7;
+    --text-color: #5841b7;
     --button-text-color: #020826;
-    --text-color-active: #5841B7;
-    --button-background: #5841B7;
+    --text-color-active: #5841b7;
+    --button-background: #5841b7;
     --button-background-active: #020826;
     --button-border: #020826;
 
@@ -91,7 +91,7 @@ button {
     font-family: Kanit;
     font-weight: 400;
     font-size: 14px;
-    
+
     color: var(--button-text-color);
     padding: 6px 12px;
     border: 0px solid var(--button-text-color);
@@ -125,7 +125,8 @@ footer {
 .github-profile {
     align-self: center;
     height: 25px;
-    filter: brightness(0%) saturate(100%) invert(26%) sepia(35%) saturate(3587%) hue-rotate(236deg) brightness(88%) contrast(90%);
+    filter: brightness(0%) saturate(100%) invert(26%) sepia(35%) saturate(3587%)
+        hue-rotate(236deg) brightness(88%) contrast(90%);
     /* filter: brightness(0%) saturate(100%) invert(8%) sepia(18%) saturate(3492%) hue-rotate(203deg) brightness(93%) contrast(112%); */
     /* filter: brightness(0%) saturate(100%) invert(5%) sepia(93%) saturate(7429%) hue-rotate(217deg) brightness(77%) contrast(109%); */
 }
