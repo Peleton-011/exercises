@@ -4,6 +4,19 @@ const r = document.querySelector(":root");
 function setup() {
     setButtonWidth(".left-buttons");
     setButtonWidth(".right-buttons");
+    
+    //
+    const prevBtn = document.querySelector(".prev");
+    prevBtn.addEventListener("click", () => {
+        let prev = findPrevPage();
+        location.replace("../" + prev + "/" + prev + ".html");
+    });
+
+    const nextBtn = document.querySelector(".next");
+    nextBtn.addEventListener("click", () => {
+        let next = findNextPage();
+        location.replace("../" + next + "/" + next + ".html");
+    })
 }
 
 //Sets width of all contiguous elements to that of the widest element
