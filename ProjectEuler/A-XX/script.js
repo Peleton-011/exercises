@@ -58,6 +58,41 @@ function findNextPage() {
     return docName;
 }
 
+//Returns the prev exercise
+function findPrevPage() {
+    let docName = window.location.pathname;
+    let splitName = docName.split("/");
+
+    //Get folder name to find the prev one
+    docName = splitName[splitName.length - 2];
+
+    //Split name into tag and num
+    //A-32 -> A is the tag, 32 is the num
+    let tag = docName.split("-")[0];
+    let num = Number(docName.split("-")[1]);
+
+    //Set the number to the previous one
+    num -= 1;
+
+    //Check if it goes below 0, if it does go to previous tag
+    if (num < 0) {
+        if (tag == "A") {
+            firstPageReached();
+            return "A-00";
+        }
+        tag = prevLetter(tag);
+    }
+    num %= 100;
+
+    //Put updated name back together
+    num = String(num);
+    num = num.padStart(2, "0");
+
+    docName = tag + "-" + num;
+
+    return docName;
+}
+
 //Get next letter in alphabet (It loops over at z)
 function nextLetter(str) {
     return str.replace(/[A-Z]/, (char) => {
@@ -77,6 +112,11 @@ function prevLetter(str) {
         var charCode = char.charCodeAt(0);
         return String.fromCharCode(--charCode);
     });
+}
+
+//This is a temporal fix, looping back over will be implemented at one point
+function firstPageReached() {
+    alert("Can't go any further back!");
 }
 
 setup();
