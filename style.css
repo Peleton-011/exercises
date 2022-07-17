@@ -14,6 +14,7 @@
     --button-background: #5841b7;
     --button-background-active: #020826;
     --button-border: #020826;
+    --button-padding: 12px;
 
     --header-and-footer: #272343;
 }
@@ -26,7 +27,7 @@ body {
     background-color: var(--background-color);
     display: grid;
     grid-template-areas:
-        "left-header main-header right-header"
+        "header header header"
         "blank main sidebar"
         "footer footer footer";
     grid-template-columns: 1fr var(--grid-size) 1fr;
@@ -38,20 +39,12 @@ footer {
     background-color: var(--header-and-footer);
 }
 
-header#left {
-    grid-area: left-header;
-}
-
-header#main {
+header {
     padding: 0px 5px;
-    grid-area: main-header;
+    grid-area: header;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-header#right {
-    grid-area: right-header;
 }
 
 header {
@@ -93,7 +86,7 @@ button {
     font-size: 14px;
 
     color: var(--button-text-color);
-    padding: 6px 12px;
+    padding: 6px var(--button-padding);
     border: 0px solid var(--button-text-color);
     border-radius: 9px;
     background-color: var(--button-background);
