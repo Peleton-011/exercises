@@ -71,4 +71,12 @@ function nextLetter(str) {
     });
 }
 
+//Get previous letter in alphabet
+function prevLetter(str) {
+    return str.replace(/[A-Z]/, (char) => {
+        var charCode = char.charCodeAt(0);
+        return String.fromCharCode(--charCode);
+    });
+}
+
 setup();
