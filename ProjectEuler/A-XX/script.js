@@ -1,11 +1,28 @@
 const r = document.querySelector(":root");
 
+let docName = window.location.pathname;
+let splitName = docName.split("/");
+
+//Get folder name
+docName = splitName[splitName.length - 2];
+
+//Split name into tag and num
+//A-32 -> A is the tag, 32 is the num
+const tag = docName.split("-")[0];
+const num = Number(docName.split("-")[1]);
+
 //Sets everything up, all one time procedures are done here
 function setup() {
     setButtonWidth(".left-buttons");
     setButtonWidth(".right-buttons");
     
-    //
+    //Link to the homepage
+    const homeBtn = document.querySelector(".home");
+    homeBtn.addEventListener("click", () => {
+        location.replace("../../index.html")
+    });
+
+    //Previous and next page buttons
     const prevBtn = document.querySelector(".prev");
     prevBtn.addEventListener("click", () => {
         let prev = findPrevPage();
@@ -42,17 +59,6 @@ function setButtonWidth(selector) {
 
 //Returns the next exercise
 function findNextPage() {
-    let docName = window.location.pathname;
-    let splitName = docName.split("/");
-
-    //Get folder name to find the next one
-    docName = splitName[splitName.length - 2];
-
-    //Split name into tag and num
-    //A-32 -> A is the tag, 32 is the num
-    let tag = docName.split("-")[0];
-    let num = Number(docName.split("-")[1]);
-
     //Set the number to the next one
     num += 1;
 
@@ -66,24 +72,13 @@ function findNextPage() {
     num = String(num);
     num = num.padStart(2, "0");
 
-    docName = tag + "-" + num;
+    let newDoc = tag + "-" + num;
 
-    return docName;
+    return newDoc;
 }
 
 //Returns the prev exercise
 function findPrevPage() {
-    let docName = window.location.pathname;
-    let splitName = docName.split("/");
-
-    //Get folder name to find the prev one
-    docName = splitName[splitName.length - 2];
-
-    //Split name into tag and num
-    //A-32 -> A is the tag, 32 is the num
-    let tag = docName.split("-")[0];
-    let num = Number(docName.split("-")[1]);
-
     //Set the number to the previous one
     num -= 1;
 
@@ -101,9 +96,9 @@ function findPrevPage() {
     num = String(num);
     num = num.padStart(2, "0");
 
-    docName = tag + "-" + num;
+    let newDoc = tag + "-" + num;
 
-    return docName;
+    return newDoc;
 }
 
 //Get next letter in alphabet (It loops over at z)
