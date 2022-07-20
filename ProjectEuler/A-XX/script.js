@@ -15,6 +15,14 @@ const num = Number(docName.split("-")[1]);
 function setup() {
     setButtonWidth(".left-buttons");
     setButtonWidth(".right-buttons");
+
+    //Link to the euler project page
+    const eulerBtn = document.querySelector(".euler");
+    eulerBtn.addEventListener("click", () => {
+        let tempNum = (tag.charCodeAt(0) - "A".charCodeAt(0)) * 100 + num;
+        let url = "https://projecteuler.net/problem=" + String(tempNum);
+        window.open(url, "_blank").focus();
+    });
     
     //Link to the homepage
     const homeBtn = document.querySelector(".home");
