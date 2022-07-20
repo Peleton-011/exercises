@@ -27,20 +27,20 @@ function setup() {
     //Link to the homepage
     const homeBtn = document.querySelector(".home");
     homeBtn.addEventListener("click", () => {
-        location.replace("../../index.html")
+        location.replace("../index.html")
     });
 
     //Previous and next page buttons
     const prevBtn = document.querySelector(".prev");
     prevBtn.addEventListener("click", () => {
         let prev = findPrevPage();
-        location.replace("../" + prev + "/" + prev + ".html");
+        location.replace("./" + prev + "/" + prev + ".html");
     });
 
     const nextBtn = document.querySelector(".next");
     nextBtn.addEventListener("click", () => {
         let next = findNextPage();
-        location.replace("../" + next + "/" + next + ".html");
+        location.replace("./" + next + "/" + next + ".html");
     })
 }
 
