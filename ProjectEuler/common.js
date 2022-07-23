@@ -23,11 +23,11 @@ function setup() {
         let url = "https://projecteuler.net/problem=" + String(tempNum);
         window.open(url, "_blank").focus();
     });
-    
+
     //Link to the homepage
     const homeBtn = document.querySelector(".home");
     homeBtn.addEventListener("click", () => {
-        location.replace("../index.html")
+        location.replace("../index.html");
     });
 
     //Previous and next page buttons
@@ -41,7 +41,7 @@ function setup() {
     nextBtn.addEventListener("click", () => {
         let next = findNextPage();
         location.replace("./" + next + "/" + next + ".html");
-    })
+    });
 }
 
 //Sets width of all contiguous elements to that of the widest element
