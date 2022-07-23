@@ -1,9 +1,28 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-let problemNum = 20;
 const shellFile = "./move.sh";
 
+
+let problemNum = 0;
+let problemAmnt = 10;
+
 const { exec } = require("child_process");
+const { EventEmitter } = require("stream");
+
+EventEmitter.setMaxListeners(20);
+
+const readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+readline.question("Insert start problem: ", (firstProblem) => {
+    problemNum = firstProblem;
+});
+
+// readline.question("Insert amount of problems: ", (numOfProblems) => {
+//     problemAmnt = numOfProblems;
+// });
 
 const hiddenElems = ['"center print"', '"problem_icons"'];
 
@@ -28,42 +47,56 @@ const scrapePage = async (num) => {
     // data = data[1];
     // data = "<h2>" + data;
 
-    writeData(pageData, fileName);
-    readWriteAsync(fileName);
+    let foo;
+    foo = await writeData(pageData, fileName);
+    foo = await readWriteAsync(fileName);
 };
 
-function writeData(data, fileName) {
+const writeData = async (data, fileName) => {
     fs.writeFile(fileName, data, (err) => {
         if (err) {
             console.error(err);
         }
         // file written successfully
+        return "file written successfully!";
     });
 }
 
-function readWriteAsync(fileName) {
+const readWriteAsync = async (fileName) => {
     fs.readFile(fileName, "utf-8", function (err, data) {
         if (err) throw err;
-
-        for (let i = 0; i < hiddenElems.length; i++) {
-            // let regEx = `/${hiddenElems[i]}/gim`;
-            data = data.replace(hiddenElems[i], hiddenElems[i] + " hidden");
-        }
+        
+        data = cleanData(data);
 
         fs.writeFile(fileName, data, "utf-8", function (err) {
             if (err) throw err;
         });
+        return "file written successfully!";
     });
 }
 
-for (let i = 1; i <= problemNum; i++) {
+function cleanData (raw) {
+    let htmlObject = document.createElement("div");
+    for (let i = 0; i < hiddenElems.length; i++) {
+        // let regEx = `/${hiddenElems[i]}/gim`;
+        data = data.replace(hiddenElems[i], hiddenElems[i] + " hidden");
+    }//Take out line breaks
+    
+    htmlObject.innerHTML = data;
+    const undesiredButtons = htmlObject.querySelector("#problem_icons")
+    const undesiredSomething = htmlObject.querySelector(".center")
+    undesiredButtons.remove()
+    undesiredSomething.remove()
+    data = htmlObject.innerHTML;
+
+    return data;
+
+    // data = data.replace(/(\r\n|\n|\r)/gm, "");
+    
+} 
+
+
+for (let i = problemNum; i <= (problemNum + problemAmnt); i++) {
     scrapePage(i);
 }
 
-exec(shellFile, (error, stdout, stderr) => {
-    console.log(stdout);
-    console.log(stderr);
-    if (error !== null) {
-        console.log(`exec error: ${error}`);
-    }
-});
