@@ -1,15 +1,16 @@
 const r = document.querySelector(":root");
 
-let docName = window.location.pathname;
-let splitName = docName.split("/");
+const filePath = window.location.pathname;
+let splitName = filePath.split("/");
 
 //Get folder name
-docName = splitName[splitName.length - 2];
+let docName = splitName[splitName.length - 2];
+console.log(docName);
 
 //Split name into tag and num
 //A-32 -> A is the tag, 32 is the num
-const tag = docName.split("-")[0];
-const num = Number(docName.split("-")[1]);
+let tag = docName.split("-")[0];
+let num = Number(docName.split("-")[1]);
 
 //Sets everything up, all one time procedures are done here
 function setup() {
@@ -34,13 +35,13 @@ function setup() {
     const prevBtn = document.querySelector(".prev");
     prevBtn.addEventListener("click", () => {
         let prev = findPrevPage();
-        location.replace("./" + prev + "/" + prev + ".html");
+        location.replace("../" + prev + "/" + prev + ".html");
     });
 
     const nextBtn = document.querySelector(".next");
     nextBtn.addEventListener("click", () => {
         let next = findNextPage();
-        location.replace("./" + next + "/" + next + ".html");
+        location.replace("../" + next + "/" + next + ".html");
     });
 }
 
