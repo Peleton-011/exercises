@@ -2,22 +2,13 @@ const puppeteer = require("puppeteer");
 const fs = require("fs");
 const shellFile = "./move.sh";
 
-let problemNum = 0;
+let problemNum = 40;
 let problemAmnt = 10;
 
 const { exec } = require("child_process");
 const { EventEmitter } = require("stream");
 
 EventEmitter.setMaxListeners(20);
-
-const readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
-
-readline.question("Insert start problem: ", (firstProblem) => {
-    problemNum = firstProblem;
-});
 
 // readline.question("Insert amount of problems: ", (numOfProblems) => {
 //     problemAmnt = numOfProblems;
