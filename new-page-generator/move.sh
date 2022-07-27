@@ -4,12 +4,12 @@
 #echo -n "Select mode 1 -> Overwrite, 0 -> not"
 #read -r CURRMODE
 CURRMODE=1
+
 for i in *{0..9}.html ; do
+    cd "../../new-page-generator" 
     #Do for all existing Problem-XX.html files
-    echo "$i"
     [ -f "$i" ] || continue
-    echo "$i"
-    #Get file content and rase file
+    #Get file content and erase file
     CONTENT=$(<"$i")
     rm "${i}"
     #Get problem number
@@ -24,24 +24,18 @@ for i in *{0..9}.html ; do
     elif [ "$LEN" -lt 2 ] ; then
         i="0$i"
     fi
-    echo "$i"
-    echo "$ONUM"
     #Set tag
     printf -v TAG "\x$(printf %x $((HUNDRED+65)))"
     NAME="${TAG}-${i}"
     #Set path
     PROBLEM="../ProjectEuler/${NAME}"
     #Exit if it already exists
-    [ "${CURRMODE}" -eq "1" ] && [ -d "${PROBLEM}" ] && echo "cum" && continue
+    [ "${CURRMODE}" -eq "1" ] && [ -d "${PROBLEM}" ] && continue
     #Copy dir and edit insides
-    echo "nem $NAME"
-    echo "prog $PROBLEM"
     cp -r "../ProjectEuler/A-XX" "${PROBLEM}"
-    cd "${PROBLEM}/" || { echo "Error changing directory" ; continue ; }
-    mv "./A-XX.html" "./${NAME}.html" && echo "moved"
-    sed -i "s/Exercice/Exercice ${ONUM}/g" "./${NAME}.html" && echo "edit1"
-    echo "between edits"
-    echo "${CONTENT}"
+    cd "${PROBLEM}/" || echo "Error changing dir"
+    mv "./A-XX.html" "./${NAME}.html"
+    sed -i "s/Exercice/Exercice ${ONUM}/g" "./${NAME}.html"
     #Add content to insides
-    sed -i "s;Sample problem text;${CONTENT};g" "./${NAME}.html" && echo "edit2"
+    sed -i "s#Sample problem text#${CONTENT}#g" "./${NAME}.html"
 done

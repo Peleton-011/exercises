@@ -43,6 +43,7 @@ const scrapePage = async (num) => {
         const undesiredSomething = document.querySelector(".center");
         undesiredButtons.remove();
         undesiredSomething.remove();
+    el.innerHTML = el.innerHTML.replace(/(\r\n|\n|\r)/gm, "");
         return el.innerHTML;
     }, element);
 
@@ -96,7 +97,6 @@ function cleanData(raw) {
 
     return data;
 
-    // data = data.replace(/(\r\n|\n|\r)/gm, "");
 }
 
 for (let i = problemNum; i <= problemNum + problemAmnt; i++) {
